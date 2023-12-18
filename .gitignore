@@ -38,6 +38,5 @@ out/
 !**/src/generated
 
 ### QueryDSL###
-/generated/
 /src/main/generated/com/minwoo/querydsl/entity/
-
+/src/main/generated/com/minwoo/querydsl/dto/
