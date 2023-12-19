@@ -9,6 +9,7 @@ import com.minwoo.querydsl.entity.QTeam;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -104,9 +105,9 @@ public class MemberJpaRepository {
                 .where( // 조건들을 조합/재사용이 가능함
                         usernameEq(condition.getUsername()),
                         teamNameEq(condition.getTeamName()),
-                        //ageBetween(condition.getAgeLoe(), condition.getAgeGoe())
-                        ageLoe(condition.getAgeLoe()),
-                        ageGoe(condition.getAgeGoe())
+                        ageBetween(condition.getAgeLoe(), condition.getAgeGoe())
+                        //ageLoe(condition.getAgeLoe()),
+                        //ageGoe(condition.getAgeGoe())
                 )
                 .fetch();
     }
@@ -127,8 +128,12 @@ public class MemberJpaRepository {
         return ageLoe != null ? member.age.loe(ageLoe) : null;
     }
 
-    // null 처리 해줘야 함
     private BooleanExpression ageBetween(Integer ageLoe, Integer ageGoe) {
+        // 둘다 null인 경우 true(1) 응답(그냥 null로 응답하면 500 에러 발생)
+        if(ageLoe == null && ageGoe == null) {
+            return Expressions.TRUE;
+        }
+
         return ageGoe(ageLoe).and(ageLoe(ageGoe));
     }
 

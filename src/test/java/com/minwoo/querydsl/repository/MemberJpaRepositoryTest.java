@@ -82,4 +82,5 @@ class MemberJpaRepositoryTest {
 
         assertThat(memberTeamDtos).extracting("username").containsExactly("member3", "member4");
     }
+
 }
