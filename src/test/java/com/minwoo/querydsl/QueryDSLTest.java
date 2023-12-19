@@ -119,7 +119,10 @@ public class QueryDSLTest {
         em.persist(new Member("member5", 100));
         em.persist(new Member("member6", 100));
 
-        List<Member> memberList = queryFactory.selectFrom(member).where(member.age.eq(100)).orderBy(member.age.desc(), member.username.asc().nullsLast())
+        List<Member> memberList = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
                 .fetch();
 
         for (Member member1 : memberList) {
@@ -129,11 +132,12 @@ public class QueryDSLTest {
 
     @Test
     void paging() {
-        List<Member> memberList = queryFactory.selectFrom(member)
-                                              .orderBy(member.username.desc())
-                                              .offset(1)
-                                              .limit(2)
-                                              .fetch();
+        List<Member> memberList = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
 
         assertThat(memberList.size()).isEqualTo(2);
     }
@@ -161,6 +165,7 @@ public class QueryDSLTest {
                 .fetch();
 
         Tuple tuple = result.get(0);
+
         assertThat(tuple.get(member.count())).isEqualTo(4);
         assertThat(tuple.get(member.age.sum())).isEqualTo(100);
         assertThat(tuple.get(member.age.avg())).isEqualTo(25);

@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class QuerydslApplicationTests {
 
-
     @Test
     void contextLoads() {
     }

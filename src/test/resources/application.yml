@@ -1,8 +1,8 @@
 spring:
     profiles:
-        active: local
+        active: test
     datasource:
-        url: jdbc:mysql://localhost:3306/querydsl?useSSL=false&serverTimezone=Asia/Seoul
+        url: jdbc:mysql://localhost:3306/querydsltest?useSSL=false&serverTimezone=Asia/Seoul
         username: root
         password: qwe123!@#
         driver-class-name: com.mysql.cj.jdbc.Driver
