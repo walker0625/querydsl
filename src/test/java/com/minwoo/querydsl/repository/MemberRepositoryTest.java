@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.minwoo.querydsl.entity.QMember.member;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -96,6 +96,15 @@ class MemberRepositoryTest {
 
         assertThat(results.getSize()).isEqualTo(3);
         assertThat(results2.getSize()).isEqualTo(3);
+    }
+    
+    @Test
+    void queryDslPredicateExecutorTest() {
+        Iterable<Member> member1 = memberRepository.findAll(member.age.between(10, 40).and(member.username.eq("member1")));
+
+        for (Member member2 : member1) {
+            System.out.println("member2 = " + member2);
+        }
     }
 
 }

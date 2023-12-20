@@ -26,6 +26,20 @@ import static org.springframework.util.StringUtils.hasText;
 @Repository
 public class MemberRepositoryImpl implements MemberCustomRepository{
 
+    /*
+    extends QuerydslRepositorySupport
+
+    public MemberRepositoryImpl() {
+        super(Member.class);
+    }
+
+    // QueryDSL 관련 Util(Paging)을 지원하기는 하나 단점들이 장점에 비해 많아보임
+    // 1. from 부터 시작하는 방식(3.0 방식) +
+    // 2. 의존성이 늘어남(불필요한 복잡성)
+    // 3. Sort는 버그 존재(QSort는 가능)
+    // 4. JPAQueryFactory queryFactory 주입 방식 변경
+    */
+
     private final JPAQueryFactory queryFactory;
 
     @Override
